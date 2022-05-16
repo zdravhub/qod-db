@@ -10,6 +10,8 @@ FROM mariadb
 
 # MAKE SURE MYSQL_ROOT_PASSWORD is defined in the env before-hand itself!
 
+USER root
+
 # Copy scripts
 COPY 1_createdb.sql /tmp1/
 COPY 2_authors.sql /tmp1/
