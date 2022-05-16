@@ -5,11 +5,20 @@ FROM mariadb
 # RUN ["sed", "-i", "s/exec \"$@\"/echo \"not running $@\"/", "/usr/local/bin/docker-entrypoint.sh"]
 
 # needed for intialization
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=qod
+# ENV MYSQL_ROOT_PASSWORD=root
+# ENV MYSQL_DATABASE=qod
 
+# MAKE SURE MYSQL_ROOT_PASSWORD is defined in the env before-hand itself!
+
+# Copy scripts
+COPY 1_createdb.sql /tmp1/
+COPY 2_authors.sql /tmp1/
+COPY 3_genres.sql /tmp1/
+COPY 4_quotes_sm.sql /tmp1/
+
+VOLUME [/tmp1]
 # Test /var/lib/mysql
-COPY 1_createdb.sql /var/lib/mysql/
+# COPY 1_createdb.sql /var/lib/mysql/
 
 # COPY 1_createdb.sql /docker-entrypoint-initdb.d/
 # COPY 2_authors.sql /docker-entrypoint-initdb.d/
