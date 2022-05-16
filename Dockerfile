@@ -20,5 +20,5 @@ RUN ["/usr/local/bin/docker-entrypoint.sh", "mysqld", "--datadir", "/initialized
 
 FROM mariadb
 
-
+VOLUME [/var/lib/mysql]
 COPY --from=builder /initialized-db /var/lib/mysql
