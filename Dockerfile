@@ -7,7 +7,7 @@ ENV MYSQL_DATABASE=qod
 COPY 1_createdb.sql /tmp/
 COPY 2_authors.sql /tmp/
 COPY 3_genres.sql /tmp/
-COPY 4_quotes.sql /tmp/
+COPY 4_quotes_sm.sql /tmp/
 
 COPY run.sh /usr/share/container-scripts/mysql/init/
 
