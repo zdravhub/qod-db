@@ -1,4 +1,4 @@
-# qod-db
+# qod-db (v2)
 
 Quote of the Day database
 
