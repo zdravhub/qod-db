@@ -5,3 +5,8 @@ ENV MYSQL_ROOT_PASSWORD=root
 ENV MYSQL_DATABASE=qod
 
 COPY 1_createdb.sql /tmp/
+COPY 2_authors.sql /tmp/
+COPY 3_genres.sql /tmp/
+COPY 4_quotes.sql /tmp/
+
+RUN mysql -uroot < /tmp/1_createdb.sql
