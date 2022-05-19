@@ -1,7 +1,7 @@
-# qod-db
+# qod-db (v2)
 
-Quote of the Day database
+Quote of the Day database (v2) 
+## NOTES
+1) This uses redhat registry images
+2) This doesn't need root privileges to run in OpenShift (hence no need of admin perms and no need to give anyuid scc privileges)
 
-## Troubleshooting
-1) On Openshift - this won't work unless you use the below command to enable 'anyuid' perms to the openshift project where the qod-db is being deployed. This is because the mariadb docker image needs root permission to run which openshift disables by default unless 'anyuid' is used.
-`oc adm policy add-scc-to-user anyuid -z default`

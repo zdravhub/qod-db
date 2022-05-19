@@ -1,24 +1,18 @@
-FROM mariadb as builder
-
-# That file does the DB initialization but also runs mysql daemon, by removing the last line it will only init
-RUN ["sed", "-i", "s/exec \"$@\"/echo \"not running $@\"/", "/usr/local/bin/docker-entrypoint.sh"]
+FROM registry.redhat.io/rhel8/mariadb-105
 
 # needed for intialization
-ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_USER=user
+ENV MYSQL_PASSWORD=pass
 ENV MYSQL_DATABASE=qod
 
-COPY 1_createdb.sql /docker-entrypoint-initdb.d/
-COPY 2_authors.sql /docker-entrypoint-initdb.d/
-COPY 3_genres.sql /docker-entrypoint-initdb.d/
-COPY 4_quotes_sm.sql /docker-entrypoint-initdb.d/
+# Copy our sql scripts
+COPY 1_createdb.sql /tmp/
+COPY 2_authors.sql /tmp/
+COPY 3_genres.sql /tmp/
+COPY 4_quotes_sm.sql /tmp/
 
-# Need to change the datadir to something else that /var/lib/mysql because the parent docker file defines it as a volume.
-# https://docs.docker.com/engine/reference/builder/#volume :
-#       Changing the volume from within the Dockerfile: If any build steps change the data within the volume after
-#       it has been declared, those changes will be discarded.
-RUN ["/usr/local/bin/docker-entrypoint.sh", "mysqld", "--datadir", "/initialized-db", "--aria-log-dir-path", "/initialized-db"]
+# Put our script to create db and tables in the init path
+COPY run.sh /usr/share/container-scripts/mysql/init/
 
-FROM mariadb
-
-
-COPY --from=builder /initialized-db /var/lib/mysql
+# Start the server
+CMD ["run-mysqld"]
