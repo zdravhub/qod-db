@@ -1,6 +1,6 @@
-# qod-db (v2)
+# qod-db
 
-Quote of the Day database (v2) 
+Quote of the Day database
 ## NOTES
 * Works with redhat mariadb docker image
 * Automatically creates QOD db and populates it with quotes, authors and genres tables including the data
