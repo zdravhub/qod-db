@@ -1,0 +1,32 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: qod-pv-volume  # Sets PV's name
+  labels:
+    type: local  # Sets PV's type to local
+    app: qod-db
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 128Mi # Sets PV Volume
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server: 192.168.124.1
+    path: /media/nfs/mysql
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: qod-pv-claim  # Sets name of PVC
+  labels:
+    app: qod-db
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Mi  # Sets volume size
+
