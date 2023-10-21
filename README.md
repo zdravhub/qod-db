@@ -5,7 +5,7 @@
 
 ### Important
 
-This fork is used for Kubernetes deployment.
+This fork is used for __Kubernetes__ deployment
 
 For OpenShift deployment use original repo at [https://github.com/dpkshetty/qod-db](https://github.com/dpkshetty/qod-db)
 
