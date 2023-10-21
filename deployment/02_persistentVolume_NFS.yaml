@@ -14,7 +14,7 @@ spec:
   persistentVolumeReclaimPolicy: Recycle
   nfs:
     server: 192.168.124.1 # Change this to your IP or hostname
-    path: /media/nfs/mysql # Change NFS path
+    path: /media/nfs/mysql # Change this to your NFS path
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
