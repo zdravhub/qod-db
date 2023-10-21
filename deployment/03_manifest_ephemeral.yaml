@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qod-db
+  labels:
+    app: qod-db
+    tier: data
+spec:
+  type: ClusterIP
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+      protocol: TCP 
+  selector:
+    app: qod-db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qod-db
+  labels:
+    app: qod-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qod-db
+  template:
+    metadata:
+      labels:
+        app: qod-db
+    spec:
+      containers:
+        - name: qod-db
+          image: quay.io/sclorg/mariadb-105-c8s # /var/lib/mysql/data
+          imagePullPolicy: Always
+          ports:
+            - name: mysql
+              containerPort: 3306
+              protocol: TCP
+          envFrom:
+            - configMapRef: # Maps env variable from ConfigMap
+                name: qod-config
+
