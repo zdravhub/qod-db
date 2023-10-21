@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qod-db
+  labels:
+    app: qod-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qod-db
+  template:
+    metadata:
+      labels:
+        app: qod-db
+    spec:
+      containers:
+        - name: qod-db
+          #image: quay.io/metal3-io/mariadb # /var/lib/mysql
+          image: quay.io/sclorg/mariadb-105-c8s # /var/lib/mysql/data
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+          ports:
+            - name: mysql
+              containerPort: 3306
+              protocol: TCP
+          envFrom:
+            - configMapRef: # Maps env variable from ConfigMap
+                name: qod-config
+          volumeMounts:
+            - mountPath: /var/lib/mysql/data
+              name: qod-pv-volume
+#      initContainers:
+#        - name: init-mysql
+#          image: quay.io/fedora/fedora-minimal:latest
+#          command: ['sh', '-c', '/bin/chmod -R 777 /var/lib/mysql/data']
+#          command: ['sh', '-c', 'ls -l / > /tmp/TEST']
+#          command: ['sh', '-c', 'echo TEST > /tmp/TEST']
+#          volumeMounts:
+#            - mountPath: /var/lib/mysql/data
+#              name: qod-pv-volume
+      volumes:
+        - name: qod-pv-volume
+          persistentVolumeClaim:
+            claimName: qod-pv-claim # Maps claim from PersistantVolumeClaim
+
+
