@@ -1,4 +1,5 @@
-FROM registry.redhat.io/rhel8/mariadb-105
+#FROM registry.redhat.io/rhel8/mariadb-105
+FROM quay.io/fedora/mariadb-105
 
 # needed for intialization
 ENV MYSQL_USER=user
@@ -21,3 +22,4 @@ EXPOSE 3306
 
 # Start the server
 CMD ["run-mysqld"]
+
