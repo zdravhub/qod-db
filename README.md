@@ -1,9 +1,11 @@
 # qod-db
-## Quote of the Day database
+### Quote of the Day database
 
-### Important: this fork is used for Kubernetes deployment.
+---
 
-For OpenShift deployment use original repo at __[https://github.com/dpkshetty/qod-db](https://github.com/dpkshetty/qod-db)__
+Important: this fork is used for Kubernetes deployment.
+
+For OpenShift deployment use original repo at [https://github.com/dpkshetty/qod-db](https://github.com/dpkshetty/qod-db)
 
 ---
 
