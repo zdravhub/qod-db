@@ -9,4 +9,3 @@ data:
   MYSQL_PASSWORD: pass
   MYSQL_DATABASE: qod
   MYSQL_ROOT_PASSWORD: root
-
