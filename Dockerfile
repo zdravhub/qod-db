@@ -22,4 +22,3 @@ EXPOSE 3306
 
 # Start the server
 CMD ["run-mysqld"]
-
